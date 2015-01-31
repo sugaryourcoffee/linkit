@@ -1,0 +1,2 @@
+defmodule Linkit do
+end
