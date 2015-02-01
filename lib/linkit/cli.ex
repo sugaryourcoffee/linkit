@@ -64,4 +64,5 @@ defmodule Linkit.CLI do
   def command({[{:remove, true} | args], argv, _}), do: {:remove, args, argv}
   def command({[{:check,  true} | args], argv, _}), do: {:check,  args, argv}
   def command({[{:list,   true} | args], argv, _}), do: {:list,   args, argv}
+  def command({[_                     ],    _, _}), do:  :help
 end

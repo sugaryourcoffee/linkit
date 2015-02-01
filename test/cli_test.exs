@@ -8,6 +8,10 @@ defmodule CliTest do
     assert parse_args(["-h"])     == :help
   end
 
+  test ":help returned when no known command is given" do
+    assert parse_args(["--nocommand"]) == :help
+  end
+
   test ":add returned with uri, tag and description" do
     long   = ["--add", "http://example.com", 
               "--tag", "tag", 
