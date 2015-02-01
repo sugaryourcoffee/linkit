@@ -1,5 +1,5 @@
 \documentclass[10pt, a4paper]{article}
-\usepackage{graphix}
+\usepackage{graphicx}
 \usepackage{url}
 \usepackage{hyperref}
 \usepackage{xcolor}
@@ -13,11 +13,84 @@
 \begin{document}
 \title{Linkit}
 \author{Pierre Sugar\\
-\textt{pierre@sugaryourcoffee.de}}
+\texttt{pierre@sugaryourcoffee.de}}
 \date{\today}
 \maketitle
 
 \begin{abstract}
+\texttt{linkit} is a command line application that adds links to a web page that
+is created and updated by \texttt{linkit}. Links as said can be added but also
+updated and removed. It is possible to search links from the command line and
+list them. \texttt{linkit} can check whether the links are still active and
+list inactive links. Each link can have a category, tags and a discription. The
+category is used to group links and the discription can be searched for but
+tags a specifically used for searching for specific terms and topics.
 \end{abstract}
+
+\section{Project outline}
+The programm runs from the command line. When provided a link \texttt{linkit}
+will check whether the link exists and adds it to the web page. A link can be
+anything that is accessible over an \texttt{URI}. That is web sites and files.
+
+\begin{itemize}
+  \item add a link
+  \item update a link
+  \item remove a link
+  \item check if link is alive
+  \item search link based on description and tags
+  \item list all links
+  \item invoke link from command line (should open web site or file)
+\end{itemize}
+
+\section{Source code management}
+We organize the source in \texttt{Git} at 
+\url{https://github.com/sugaryourcoffee/linkit}. We first create our project
+with \texttt{Mix}, then we cd into the project directory, initialize our git
+repository, do an initial commit and push the repository to \texttt{Github}.
+
+\begin{verbatim}
+$ mix new linkit
+$ cd linkit
+$ git init
+$ git add .
+$ git commit -am "initial commit"
+$ git remote add origin git@github.com:sugaryourcoffee/linkit.git
+$ git push -u origin master
+$
+\end{verbatim}
+
+\section{Implement the Command Line Interface}
+We write the test first for our command line interface to describe the
+functions the command line interface actually should provide. We first 
+describe the commands of \texttt{linkit}.
+
+\begin{verbatim}
+$ linkit add "http://elixir-lang.org"\
+             --tag Elixir\
+             --description "Home page of Elixir"
+Added "http://elixir-lang.org"
+$ linkit add "http://ruby-lang.org"\
+             --tag Ruby\
+             --description "Home of Ruby"
+$ linkit update "http://elxir-lang.org"\
+             --description "Home of Elixir"
+Updated "http://elixir-lang.org" with description "Home of Elixir"
+$ linkit delete "http://elixir-lang.org"
+Deleted "http://elixir-lang.org"
+$ linkit check "http://elixir-lang.com"
+Check error: "http://elixir-lang.com" is not available
+$ linkit list --tag "Elixir"
+URL                      | Description   | Tags
+-------------------------+---------------+-------
+"http://elixir-lang.org" | Home of Elxir | Elixir
+$ linkit call "http://elixir-lang.org"
+$ linkit list
+URL                      | Description   | Tags
+-------------------------+---------------+-------
+"http://elixir-lang.org" | Home of Elxir | Elixir
+"http://ruby-lang.org"   | Home of Ruby  | Ruby   
+\end{verbatim}
+
+The test is shown in \ref{cli_test} on page \pageref{cli_test}.
 
 \end{document}
