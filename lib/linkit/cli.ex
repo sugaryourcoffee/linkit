@@ -58,11 +58,11 @@ defmodule Linkit.CLI do
     command(parse)
   end
 
-  def command({[{:help,   true} |    _],    _, _}), do:  :help
   def command({[{:add,    true} | args], argv, _}), do: {:add,    args, argv}
   def command({[{:update, true} | args], argv, _}), do: {:update, args, argv}
   def command({[{:remove, true} | args], argv, _}), do: {:remove, args, argv}
   def command({[{:check,  true} | args], argv, _}), do: {:check,  args, argv}
   def command({[{:list,   true} | args], argv, _}), do: {:list,   args, argv}
+  def command({[{:help,   true} |    _],    _, _}), do:  :help
   def command({[_                     ],    _, _}), do:  :help
 end
