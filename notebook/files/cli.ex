@@ -12,7 +12,6 @@ defmodule Linkit.CLI do
   def main(argv) do
     argv
     |> parse_args
-    |> process
   end
 
   @doc """
@@ -71,25 +70,4 @@ defmodule Linkit.CLI do
   # when user invokes an unknown command
   defp command({[{:help,   true} |    _],    _, _}), do:  :help
   defp command({[_                     ],    _, _}), do:  :help
-
-  def process(:help) do
-    IO.puts """
-    NAME
-        linkit - organizing links and adding them to a web page
-
-    SYNOPSIS
-        linkit command [command options] [arguments...]
-
-    VERSION
-        0.1
-
-    COMMANDS
-        add    - Adds a link to linkit
-        check  - Checks if link can be reached
-        help   - Prints this help
-        list   - Lists the links
-        remove - Removes a link
-        update - Updates a link
-    """
-  end
 end
