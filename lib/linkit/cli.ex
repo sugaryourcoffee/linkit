@@ -58,11 +58,16 @@ defmodule Linkit.CLI do
     command(parse)
   end
 
-  def command({[{:add,    true} | args], argv, _}), do: {:add,    args, argv}
-  def command({[{:update, true} | args], argv, _}), do: {:update, args, argv}
-  def command({[{:remove, true} | args], argv, _}), do: {:remove, args, argv}
-  def command({[{:check,  true} | args], argv, _}), do: {:check,  args, argv}
-  def command({[{:list,   true} | args], argv, _}), do: {:list,   args, argv}
-  def command({[{:help,   true} |    _],    _, _}), do:  :help
-  def command({[_                     ],    _, _}), do:  :help
+  # Determine the command that has been invoked from command line and return
+  # the command as an atom with the command arguments and values.
+  defp command({[{:add,    true} | args], argv, _}), do: {:add,    args, argv}
+  defp command({[{:update, true} | args], argv, _}), do: {:update, args, argv}
+  defp command({[{:remove, true} | args], argv, _}), do: {:remove, args, argv}
+  defp command({[{:check,  true} | args], argv, _}), do: {:check,  args, argv}
+  defp command({[{:list,   true} | args], argv, _}), do: {:list,   args, argv}
+
+  # When help is called command returns the atom :help. :help is also returned
+  # when user invokes an unknown command
+  defp command({[{:help,   true} |    _],    _, _}), do:  :help
+  defp command({[_                     ],    _, _}), do:  :help
 end
