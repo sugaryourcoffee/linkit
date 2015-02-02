@@ -99,4 +99,19 @@ The implementation so far is in \ref{lst:cli} on page \pageref{lst:cli}.
 
 \includecode{lib/linkit/cli.ex}{lst:cli}{files/cli.ex}
 
+Now that the commands get parsed we want to process the commands. The help 
+command is the easiest so we start with that. The help command just prints
+the usage of \texttt{linkit} and then exits the application.
+
+The next command we will process is the \texttt{add} command as without this
+we cannot do anything with the application. In a first step we just save the
+links to a file. The generation of the web page will follow later on when we
+have implemented the other commands.
+
+As usual we will start with the tests which are shown in 
+\ref{lst:cli-process-test} on page \pageref{lst:cli-process-test}.
+
+\includecode{test/cli\_process\_test.exs}{lst:cli-process-test}
+            {files/cli_process_test.exs}.
+
 \end{document}
