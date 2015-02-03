@@ -108,6 +108,37 @@ we cannot do anything with the application. In a first step we just save the
 links to a file. The generation of the web page will follow later on when we
 have implemented the other commands.
 
+We first have to decide where the link-file lives. We could let the user 
+decide about that. But we will take the approach to put the working directory
+in the users home folder under \texttt{~/.syc/linkit/}. There we put all
+application specific data. We call the link file \texttt{links}. So we don't 
+have to hardcode this we want to make this configurable. The place for that is
+the \texttt{config/config.exs}. 
+
+\includecode{config/config.exs}{lst:config}{files/config.exs}
+
+The \texttt{add} function needs to check whether the \texttt{URI} is already
+in the \texttt{links}-file. So we read the file and check whether the link is
+already there. If not we add the link otherwise we ask whether we should update
+the link with the new \texttt{tags} and \texttt{description} if given.
+
+To list the \texttt{URI}s the user invokes the \texttt{list} function. We read
+the \texttt{link} file and print the contents in a nicely formatted table.
+
+The \texttt{update} function we will implement in a similar way as the 
+\texttt{add} function. We also check whether the link is available if not we 
+ask the user whether to add it as a new link otherwise we update the link as 
+intended.
+
+When the \texttt{check} function is invoked we call the link and see whether it
+returns a \texttt{Error 404: Not found} error. After all links have been 
+checked we print a statistic about the checks. The \texttt{check} function is a
+good candidate to use \texttt{Agent}s and run the checks in parallel.
+
+The purpose of the \texttt{remove} link is basically after the \texttt{check}
+function fails for a specific \texttt{link} we want to remove the dead link
+from our \texttt{link} file.
+
 As usual we will start with the tests which are shown in 
 \ref{lst:cli-process-test} on page \pageref{lst:cli-process-test}.
 
